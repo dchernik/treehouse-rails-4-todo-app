@@ -47,6 +47,9 @@ group :development, :test do
 end
 
 group :test do
+  # https://github.com/jnicklas/capybara
   gem 'capybara', '~> 2.1.0'
+  # https://github.com/thoughtbot/shoulda-matchers
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
 
