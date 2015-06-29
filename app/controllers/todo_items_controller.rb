@@ -33,11 +33,7 @@ class TodoItemsController < ApplicationController
       render action: :edit
     end
   end
-  
-  def url_options
-    { todo_list_id: params[:todo_list_id] }.merge(super)
-  end
-  
+
   def destroy
     @todo_item = @todo_list.todo_items.find(params[:id])
     if @todo_item.destroy
@@ -46,6 +42,16 @@ class TodoItemsController < ApplicationController
       flash[:error] = "Todo list item could not be deleted."
     end
     redirect_to todo_list_todo_items_path
+  end
+  
+  def complete
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    @todo_item.update_attribute(:completed_at, Time.now)
+    redirect_to todo_list_todo_items_path, notice: 'Todo item marked as complete.'
+  end
+  
+  def url_options
+    { todo_list_id: params[:todo_list_id] }.merge(super)
   end
   
   private
